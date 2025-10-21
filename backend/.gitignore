@@ -5,23 +5,19 @@ __pycache__/
 *.pyd
 *.so
 
-# Virtual environments
 env/
 .venv/
 ENV/
+.env
 venv/
 
-# MacOS
 .DS_Store
 
-# Model files / datasets
 *.sav
 *.pkl
 *.csv
 *.db
 
-# Logs
 *.log
 
-# Jupyter
 .ipynb_checkpoints/

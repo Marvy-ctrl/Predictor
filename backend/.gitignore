@@ -1,1 +1,27 @@
-.env
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+env/
+.venv/
+ENV/
+venv/
+
+# MacOS
+.DS_Store
+
+# Model files / datasets
+*.sav
+*.pkl
+*.csv
+*.db
+
+# Logs
+*.log
+
+# Jupyter
+.ipynb_checkpoints/

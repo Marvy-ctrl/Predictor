@@ -151,7 +151,7 @@ export default function LandingPage() {
               How It Works
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Simple, fast, and accurate — your AI-powered health check in three
+              Simple, fast, and accurate your AI-powered health check in three
               easy steps
             </p>
           </div>
@@ -185,7 +185,7 @@ export default function LandingPage() {
               </div>
               <h3 className="text-xl font-semibold mb-3">Get Results</h3>
               <p className="text-gray-600">
-                Receive an instant, clear assessment of your diabetes risk — all
+                Receive an instant, clear assessment of your diabetes risk all
                 within seconds.
               </p>
             </div>

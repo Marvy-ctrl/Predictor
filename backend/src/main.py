@@ -85,8 +85,8 @@ def preprocess_input(data: UserInput) -> np.ndarray:
 
 
 try:
-    model_path = "ml_model/diabetes_model.sav"
-    scaler_path = "ml_model/scaler.sav"
+    model_path = "src/ml_model/diabetes_model.sav"
+    scaler_path = "src/ml_model/scaler.sav"
 
     with open(model_path, "rb") as model_file:
         model = pickle.load(model_file)

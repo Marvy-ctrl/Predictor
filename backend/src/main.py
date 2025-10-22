@@ -98,6 +98,11 @@ except Exception as e:
     raise RuntimeError(f"Failed to load model or scaler: {str(e)}")
 
 
+@app.get("/")
+def root():
+    return {"message": "Diabetes Risk Predictor API is running 🚀"}
+
+
 @app.post("/diabetes_prediction")
 def diabetes_prediction(input_data: UserInput):
 

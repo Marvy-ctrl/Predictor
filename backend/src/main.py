@@ -5,7 +5,7 @@ import pandas as pd
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -39,19 +39,28 @@ class UserInput(BaseModel):
     BloodPressure: float = Field(..., ge=0)
     SkinThickness: float = Field(..., ge=0)
     Insulin: float = Field(..., ge=0)
-    DiabetesPedigreeFunction: float = Field(..., ge=0)
     Age: int = Field(..., ge=0)
     Weight: float = Field(..., ge=0)
     Height: float = Field(..., gt=0)
     Pregnancies: int | None = Field(None, ge=0)
+    FamilyParents: int = Field(0, ge=0, le=2)
+    FamilySiblings: int = Field(0, ge=0, le=4)
+    FamilyGrandparents: int = Field(0, ge=0, le=4)
 
 
 def preprocess_input(data: UserInput) -> np.ndarray:
     try:
         bmi = round(float(data.Weight) / (float(data.Height) ** 2), 2)
-        print({"BMI": bmi})
 
         pregnancies = 0 if data.Gender.lower() == "male" else int(data.Pregnancies or 0)
+
+        dpf = (
+            0.5 * (data.FamilyParents or 0)
+            + 0.1 * (data.FamilySiblings or 0)
+            + 0.25 * (data.FamilyGrandparents or 0)
+        )
+        dpf = min(dpf, 1.0)
+        dpf = round(dpf, 3)
 
         processed = np.array(
             [
@@ -62,7 +71,7 @@ def preprocess_input(data: UserInput) -> np.ndarray:
                     int(data.SkinThickness),
                     int(data.Insulin),
                     bmi,
-                    float(data.DiabetesPedigreeFunction),
+                    dpf,
                     int(data.Age),
                 ]
             ]

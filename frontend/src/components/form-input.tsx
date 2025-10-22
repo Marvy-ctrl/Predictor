@@ -33,8 +33,10 @@ const formSchema = z.object({
   BloodPressure: z.coerce.number() as z.ZodNumber,
   SkinThickness: z.coerce.number() as z.ZodNumber,
   Insulin: z.coerce.number() as z.ZodNumber,
-  DiabetesPedigreeFunction: z.coerce.number() as z.ZodNumber,
   Pregnancies: (z.coerce.number() as z.ZodNumber).optional(),
+  FamilyParents: z.enum(["0", "1", "2"]),
+  FamilySiblings: z.enum(["0", "1", "2", "3", "4"]),
+  FamilyGrandparents: z.enum(["0", "1", "2", "3", "4"]),
 });
 
 type PredictionResult = {
@@ -51,7 +53,7 @@ export default function FormInput() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      Gender: undefined as any,
+      Gender: undefined,
       Pregnancies: 0,
       Glucose: 0,
       Weight: 0,
@@ -59,7 +61,6 @@ export default function FormInput() {
       BloodPressure: 0,
       SkinThickness: 0,
       Insulin: 0,
-      DiabetesPedigreeFunction: 0,
       Age: 0,
     },
   });
@@ -79,8 +80,10 @@ export default function FormInput() {
         BloodPressure: Number(values.BloodPressure),
         SkinThickness: Number(values.SkinThickness),
         Insulin: Number(values.Insulin),
-        DiabetesPedigreeFunction: Number(values.DiabetesPedigreeFunction),
         Age: Number(values.Age),
+        FamilyParents: Number(values.FamilyParents ?? 0),
+        FamilySiblings: Number(values.FamilySiblings ?? 0),
+        FamilyGrandparents: Number(values.FamilyGrandparents ?? 0),
       };
 
       const response = await fetch(
@@ -349,22 +352,103 @@ export default function FormInput() {
                   </FormItem>
                 )}
               />
+            </div>
+          </div>
+
+          <div className="family-history">
+            <div className="flex items-center space-x-2 mb-4">
+              <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-semibold text-sm">
+                4
+              </div>
+              <h2 className="font-bold text-lg md:text-2xl text-gray-900">
+                Family History
+              </h2>
+            </div>
+            <hr className="mb-6 border-gray-200" />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <FormField
                 control={form.control}
-                name="DiabetesPedigreeFunction"
+                name="FamilyParents"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="font-semibold text-gray-700">
-                      Diabetes Pedigree Function
+                      Parents with Diabetes
                     </FormLabel>
                     <FormControl>
-                      <Input
-                        type="number"
-                        step="0.001"
-                        placeholder="e.g., 0.627"
-                        className="border-gray-300 focus:border-blue-500"
-                        {...field}
-                      />
+                      <Select
+                        onValueChange={field.onChange}
+                        value={field.value}
+                      >
+                        <SelectTrigger className="w-full border-gray-300 focus:border-blue-500">
+                          <SelectValue placeholder="Select number of parents" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="0">0</SelectItem>
+                          <SelectItem value="1">1</SelectItem>
+                          <SelectItem value="2">2</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="FamilySiblings"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="font-semibold text-gray-700">
+                      Siblings with Diabetes
+                    </FormLabel>
+                    <FormControl>
+                      <Select
+                        onValueChange={field.onChange}
+                        value={field.value}
+                      >
+                        <SelectTrigger className="w-full border-gray-300 focus:border-blue-500">
+                          <SelectValue placeholder="Select number of siblings" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="0">0</SelectItem>
+                          <SelectItem value="1">1</SelectItem>
+                          <SelectItem value="2">2</SelectItem>
+                          <SelectItem value="3">3</SelectItem>
+                          <SelectItem value="4">4</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="FamilyGrandparents"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="font-semibold text-gray-700">
+                      Grandparents with Diabetes
+                    </FormLabel>
+                    <FormControl>
+                      <Select
+                        onValueChange={field.onChange}
+                        value={field.value}
+                      >
+                        <SelectTrigger className="w-full border-gray-300 focus:border-blue-500">
+                          <SelectValue placeholder="Select number of grandparents" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="0">0</SelectItem>
+                          <SelectItem value="1">1</SelectItem>
+                          <SelectItem value="2">2</SelectItem>
+                          <SelectItem value="3">3</SelectItem>
+                          <SelectItem value="4">4</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </FormControl>
                     <FormMessage />
                   </FormItem>

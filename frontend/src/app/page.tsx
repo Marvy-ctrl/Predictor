@@ -219,9 +219,9 @@ export default function LandingPage() {
                 GlucoSense
               </span>
             </div>
-            <div className="text-sm text-gray-600">
-              © 2025 GlucoSense. For informational purposes only. Consult a
-              healthcare professional.
+            <div className="text-sm text-gray-600 text-center">
+              © 2025 GlucoSense. For informational purposes and educational
+              only. Consult a healthcare professional.
             </div>
           </div>
         </div>

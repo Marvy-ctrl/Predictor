@@ -83,9 +83,9 @@ export default function Predict() {
           <div className="mt-8 p-6 bg-blue-50 border border-blue-100 rounded-xl">
             <p className="text-sm text-gray-700 text-center">
               <strong className="text-blue-900">Medical Disclaimer:</strong>{" "}
-              This tool is for informational purposes only and does not
-              constitute medical advice. Please consult with a healthcare
-              professional for proper diagnosis and treatment.
+              This tool is for informational and educational purposes only and
+              does not constitute medical advice. Please consult with a
+              healthcare professional for proper diagnosis and treatment.
             </p>
           </div>
         </div>
@@ -94,7 +94,7 @@ export default function Predict() {
       <footer className="border-t border-gray-200 py-8 mt-12">
         <div className="container mx-auto px-6">
           <div className="text-center text-sm text-gray-600">
-            © 2025 GlucoSense. For informational purposes only.
+            © 2025 GlucoSense. For informational and educational purposes only.
           </div>
         </div>
       </footer>

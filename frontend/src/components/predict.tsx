@@ -81,7 +81,7 @@ export default function Predict() {
           </div>
 
           <div className="mt-8 p-6 bg-blue-50 border border-blue-100 rounded-xl">
-            <p className="text-sm text-gray-700 text-center">
+            <p className="text-sm text-gray-700">
               <strong className="text-blue-900">Medical Disclaimer:</strong>{" "}
               This tool is for informational and educational purposes only and
               does not constitute medical advice. Please consult with a
